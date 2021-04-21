@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { api } from '../services/api'
 
 import { format, parseISO } from 'date-fns'
@@ -12,7 +13,6 @@ type Episode = {
   id: string;
   title: string;
   thumbnail: string;
-  description: string;
   members: string;
   duration: string;
   durationAsString: string;
@@ -44,9 +44,11 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 />
 
                 <div className={styles.episodesDetail}>
-                  <a href="">{episode.title}</a>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a >{episode.title}</a>
+                  </Link>
                   <p>{episode.members}</p>
-                  <span style={{ width: 100}}>{episode.publishedAt}</span>
+                  <span style={{ width: 100 }}>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
 
@@ -65,12 +67,14 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
         <table cellSpacing={0}>
           <thead>
-            <th></th>
-            <th>Podcast</th>
-            <th>Integrantes</th>
-            <th>Data</th>
-            <th>Duração</th>
-            <th></th>
+            <tr>
+              <th></th>
+              <th>Podcast</th>
+              <th>Integrantes</th>
+              <th>Data</th>
+              <th>Duração</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             {allEpisodes.map(episodio => {
@@ -93,7 +97,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td>{episodio.durationAsString}</td>
                   <td>
                     <button>
-                      <img src="/play-green.svg" alt="Tocar episódio"/>
+                      <img src="/play-green.svg" alt="Tocar episódio" />
                     </button>
                   </td>
                 </tr>
@@ -125,7 +129,6 @@ export const getStaticProps: GetStaticProps = async () => {
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
-      description: episode.description,
       url: episode.file.url
     }
   })
