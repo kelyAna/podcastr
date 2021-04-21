@@ -15,10 +15,14 @@
 
   --green-500: #04D361;
   
+  --purple-200: #baa1f5;
   --purple-300: #9F75FF;
   --purple-400: #9164FA; 
   --purple-500: #8257E5;
   --purple-800: #6F48C9;
+
+  --purple-900: #2d1a57; 
+
 }
 
 @media (max-width: 1080px){
@@ -35,7 +39,7 @@
 
 
 body{
-  background: var(--gray-50)
+  background: var(--gray-100)
 }
 
 body, input ,textarea, button{
