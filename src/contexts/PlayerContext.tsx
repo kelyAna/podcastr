@@ -19,7 +19,7 @@ type PlayerContextData = {
 
 export const PlayerContext = createContext({} as PlayerContextData)
 
-export function PlayerContextProvider() {
+export function PlayerContextProvider(prop) {
   const [episodeList, setEpisodeList] = useState([])
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
